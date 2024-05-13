@@ -27,7 +27,7 @@ const Navbar = () => {
     return [
       isActive ? "text-green-300" : "text-green-700",
       isActive
-        ? "border-[2px] border-green-400 rounded  px-2 font-semibold"
+        ? "border-[2px] border-green-300 rounded  px-2 font-semibold"
         : "font-medium px-2 hover:opacity-75",
       "py-1",
     ].join(" ");
