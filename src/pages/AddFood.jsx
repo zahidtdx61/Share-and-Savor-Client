@@ -57,7 +57,7 @@ const AddFood = () => {
       </Helmet>
       <div className="w-full h-fit">
         <div className="w-[50px] h-[50px] mx-auto">
-          <Avatar size="lg" />
+          <Avatar size="lg" src={photoURL}/>
         </div>
       </div>
 
