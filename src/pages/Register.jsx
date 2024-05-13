@@ -42,7 +42,7 @@ const Register = () => {
     return /\d/.test(str);
   };
 
-  const { session } = useSession();
+  const session = useSession();
   const addUserToDatabase = async (user) => {
     const { uid, email, displayName, photoURL } = user;
     try {
