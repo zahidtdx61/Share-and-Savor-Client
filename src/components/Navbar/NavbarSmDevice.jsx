@@ -70,10 +70,10 @@ const NavbarSmDevice = ({ routes, navStyle, mode }) => {
 
         {!user && (
           <>
-            <ul className="px-2 py-1 w-full mt-4 text-center  bg-primary-navy  text-white rounded hover:bg-opacity-70 hover:scale-105">
+            <ul className="px-2 py-1 w-full mt-4 text-center bg-green-600 text-white rounded hover:bg-opacity-70  hover:scale-105">
               <NavLink to={"/login"}>Log In</NavLink>
             </ul>
-            <ul className="px-2 py-1 w-full text-center bg-primary-sky  text-white rounded hover:bg-opacity-70 hover:scale-105">
+            <ul className="px-2 py-1 w-full text-center bg-[#306844] text-white rounded hover:bg-opacity-70 hover:scale-105">
               <NavLink to={"/register"}>Register</NavLink>
             </ul>
           </>

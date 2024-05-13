@@ -23,25 +23,19 @@ const Login = () => {
     user,
   } = useAuth();
 
-  const { session } = useSession();
-  // uuid, email, username
+  const session = useSession();
+  //  name, email, uid, image
   const addUserToDatabase = async (user) => {
-    const { uid, email, displayName } = user;
+    const { uid, email, displayName, photoURL } = user;
     try {
-      const response = await session.post(
-        "/add-user",
-        {
-          uuid: uid,
-          email,
-          username: displayName,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log(response.data);
+      console.log({ uid, email, displayName, photoURL, session });
+      const response = await session.post("/add-user", {
+        uid: uid,
+        email,
+        name: displayName,
+        image: photoURL,
+      });
+      console.log(response);
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -55,17 +49,15 @@ const Login = () => {
   const handleSignIn = async (data) => {
     const { email, password } = data;
     try {
-      await signInEmail(email, password);
+      const result = await signInEmail(email, password);
       navigate(prevPage);
       toast.success("Welcome to Share and Savor !!!");
-      // addUserToDatabase(user);
+      addUserToDatabase(result.user);
     } catch (error) {
       setIsLoading(false);
       setUser(null);
       toast.error("Wrong credentials !!!");
     }
-
-    console.log(data);
   };
 
   const handleGoogleSignIn = async () => {

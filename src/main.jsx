@@ -14,7 +14,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <AuthProvider>
         <CssVarsProvider>
           <RouterProvider router={router} />
-
           <CssBaseline />
           <Toaster />
         </CssVarsProvider>
