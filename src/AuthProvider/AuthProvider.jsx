@@ -54,7 +54,6 @@ const AuthProvider = ({ children }) => {
   };
 
   const authData = {
-    dummy: "anyTxt",
     user,
     setUser,
     isLoading,
