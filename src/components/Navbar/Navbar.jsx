@@ -3,7 +3,7 @@ import { CiLight } from "react-icons/ci";
 import { IoMoonOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import UserInfo from "../UserInfo/UserInfo";
+// import UserInfo from "../UserInfo/UserInfo";
 import NavbarSmDevice from "./NavbarSmDevice";
 
 const Navbar = () => {
@@ -18,7 +18,6 @@ const Navbar = () => {
   ];
 
   const handleTheme = () => {
-    console.log("Hola event");
     console.log("theme", mode);
     setMode(mode === "light" ? "dark" : "light");
   };
@@ -36,7 +35,7 @@ const Navbar = () => {
   return (
     <div
       className={`w-full ${
-        mode === "0" ? "bg-white" : "bg-[#282a36]"
+        mode === "light" ? "bg-white" : "bg-[#282a36]"
       }  z-50 p-2 lg:py-4 lg:px-8  flex items-center justify-between shadow-lg fixed`}
     >
       <div className="flex-1 lg:flex-none">
@@ -71,7 +70,7 @@ const Navbar = () => {
       </div>
 
       <div onClick={handleTheme} className="mr-2 lg:mr-4 flex items-center">
-        {mode === "0" ? (
+        {mode === "light" ? (
           <button>
             <CiLight size={30} />
           </button>
@@ -84,7 +83,8 @@ const Navbar = () => {
 
       {user ? (
         <div className="lg:flex gap-2 hidden lg:static">
-          <UserInfo />
+          {/* <UserInfo /> */}
+          Hehe
         </div>
       ) : (
         <div className={`lg:flex gap-2 hidden lg:static`}>

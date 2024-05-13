@@ -1,6 +1,7 @@
 import { Outlet, useNavigation } from "react-router-dom";
-import Loader from "../../pages/Loader";
+import Navbar from "../../components/Navbar/Navbar";
 import useAuth from "../../hooks/useAuth";
+import Loader from "../../pages/Loader";
 
 const MainLayout = () => {
   const navigation = useNavigation();
@@ -11,6 +12,7 @@ const MainLayout = () => {
 
   return (
     <div>
+      <Navbar />
       <Outlet />
     </div>
   );
