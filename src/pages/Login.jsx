@@ -57,8 +57,8 @@ const Login = () => {
     try {
       await signInEmail(email, password);
       navigate(prevPage);
-      toast.success("Welcome to Serenity Seekers !!!");
-      addUserToDatabase(user);
+      toast.success("Welcome to Share and Savor !!!");
+      // addUserToDatabase(user);
     } catch (error) {
       setIsLoading(false);
       setUser(null);
@@ -74,8 +74,8 @@ const Login = () => {
       const user = result.user;
       setUser(user);
       navigate(prevPage);
-      toast.success("Welcome to Serenity Seekers !!!");
-      addUserToDatabase(user);
+      toast.success("Welcome to Share and Savor !!!");
+      // addUserToDatabase(user);
     } catch (error) {
       setIsLoading(false);
       setUser(null);
@@ -89,8 +89,8 @@ const Login = () => {
       const user = result.user;
       setUser(user);
       navigate(prevPage);
-      toast.success("Welcome to Serenity Seekers !!!");
-      addUserToDatabase(user);
+      toast.success("Welcome to Share and Savor !!!");
+      // addUserToDatabase(user);
     } catch (error) {
       setIsLoading(false);
       setUser(null);
@@ -101,7 +101,7 @@ const Login = () => {
   return (
     <>
       <Helmet>
-        <title>Serenity Seekers | Sign In</title>
+        <title>Share and Savor | Sign In</title>
       </Helmet>
 
       <section className="relative w-full min-h-[calc(100vh-80px)] flex flex-col items-center justify-start mt-4 px-4">
