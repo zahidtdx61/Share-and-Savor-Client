@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { ScaleLoader } from "react-spinners";
 import useAuth from "../hooks/useAuth";
 import useSession from "../hooks/useSession";
@@ -31,7 +32,9 @@ const AddFood = () => {
       // });
       const res = await session.post("/add-food", foodData);
       console.log(res.data);
+      reset();
       setReqLoading(false);
+      toast.success("Food added successfully for donation");
     } catch (error) {
       console.error(error);
       setReqLoading(false);
@@ -57,7 +60,7 @@ const AddFood = () => {
       </Helmet>
       <div className="w-full h-fit">
         <div className="w-[50px] h-[50px] mx-auto">
-          <Avatar size="lg" src={photoURL}/>
+          <Avatar size="lg" src={photoURL} />
         </div>
       </div>
 

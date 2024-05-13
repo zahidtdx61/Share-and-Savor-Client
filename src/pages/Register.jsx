@@ -43,24 +43,17 @@ const Register = () => {
   };
 
   const { session } = useSession();
-  // uuid, email, username
   const addUserToDatabase = async (user) => {
-    const { uid, email, displayName } = user;
+    const { uid, email, displayName, photoURL } = user;
     try {
-      const response = await session.post(
-        "/add-user",
-        {
-          uuid: uid,
-          email,
-          username: displayName,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log(response.data);
+      // console.log({ uid, email, displayName, photoURL, session });
+      await session.post("/add-user", {
+        uid: uid,
+        email,
+        name: displayName,
+        image: photoURL,
+      });
+      // console.log(response);
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -126,7 +119,7 @@ const Register = () => {
 
       navigate(prevPage);
       toast.success("Welcome to Serenity Seekers !!!");
-      // addUserToDatabase(user);
+      addUserToDatabase(user);
     } catch (error) {
       // console.error('get error: ', error.code, error.message);
       if (error.code === "auth/email-already-in-use")
@@ -143,7 +136,7 @@ const Register = () => {
       setUser(user);
       navigate(prevPage);
       toast.success("Welcome to Serenity Seekers !!!");
-      // addUserToDatabase(user);
+      addUserToDatabase(user);
     } catch (error) {
       setIsLoading(false);
       setUser(null);
@@ -158,7 +151,7 @@ const Register = () => {
       setUser(user);
       navigate(prevPage);
       toast.success("Welcome to Serenity Seekers !!!");
-      // addUserToDatabase(user);
+      addUserToDatabase(user);
     } catch (error) {
       setIsLoading(false);
       setUser(null);

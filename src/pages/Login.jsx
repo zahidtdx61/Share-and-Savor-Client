@@ -29,7 +29,7 @@ const Login = () => {
     const { uid, email, displayName, photoURL } = user;
     try {
       // console.log({ uid, email, displayName, photoURL, session });
-      const response = await session.post("/add-user", {
+      await session.post("/add-user", {
         uid: uid,
         email,
         name: displayName,
@@ -67,7 +67,7 @@ const Login = () => {
       setUser(user);
       navigate(prevPage);
       toast.success("Welcome to Share and Savor !!!");
-      // addUserToDatabase(user);
+      addUserToDatabase(user);
     } catch (error) {
       setIsLoading(false);
       setUser(null);
@@ -82,7 +82,7 @@ const Login = () => {
       setUser(user);
       navigate(prevPage);
       toast.success("Welcome to Share and Savor !!!");
-      // addUserToDatabase(user);
+      addUserToDatabase(user);
     } catch (error) {
       setIsLoading(false);
       setUser(null);
