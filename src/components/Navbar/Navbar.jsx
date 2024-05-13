@@ -3,7 +3,7 @@ import { CiLight } from "react-icons/ci";
 import { IoMoonOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-// import UserInfo from "../UserInfo/UserInfo";
+import UserInfo from "../UserInfo/UserInfo";
 import NavbarSmDevice from "./NavbarSmDevice";
 
 const Navbar = () => {
@@ -12,9 +12,10 @@ const Navbar = () => {
 
   const routes = [
     { name: "Home", path: "/", type: "public" },
-    { name: "All Tourists Spot", path: "/all-tourist-spot", type: "public" },
-    { name: "Add Tourists Spot", path: "/add-tourist-spot", type: "private" },
-    { name: "My List", path: "/my-list", type: "private-conditional" },
+    { name: "Available Foods", path: "/available-foods", type: "public" },
+    { name: "Add Food", path: "/add-food", type: "private" },
+    { name: "My Foods", path: "/my-foods", type: "private-conditional" },
+    { name: "My Requests", path: "/my-requests", type: "private-conditional" },
   ];
 
   const handleTheme = () => {
@@ -24,9 +25,9 @@ const Navbar = () => {
 
   const navStyle = (isActive) => {
     return [
-      isActive ? "text-sky-400" : "text-blue-600",
+      isActive ? "text-green-300" : "text-green-700",
       isActive
-        ? "border-[2px] border-sky-400 rounded  px-2 font-semibold"
+        ? "border-[2px] border-green-400 rounded  px-2 font-semibold"
         : "font-medium px-2 hover:opacity-75",
       "py-1",
     ].join(" ");
@@ -39,9 +40,11 @@ const Navbar = () => {
       }  z-50 p-2 lg:py-4 lg:px-8  flex items-center justify-between shadow-lg fixed`}
     >
       <div className="flex-1 lg:flex-none">
-        <h1 className="text-xl md:text-[2rem] font-bold  select-none text-blue-400">
+        <h1 className="text-xl md:text-[2rem] font-bold  select-none font-lexend">
           <NavLink to={"/"}>
-            Serenity <span className="text-sky-800">Seekers</span>
+            <span className="text-2xl font-bold bg-gradient-to-r from-green-950 via-green-400 to-red-400 text-transparent bg-clip-text bg-300% animate-gradient">
+              Share and Savor
+            </span>
           </NavLink>
         </h1>
       </div>
@@ -83,13 +86,12 @@ const Navbar = () => {
 
       {user ? (
         <div className="lg:flex gap-2 hidden lg:static">
-          {/* <UserInfo /> */}
-          Hehe
+          <UserInfo />
         </div>
       ) : (
         <div className={`lg:flex gap-2 hidden lg:static`}>
           <div className="px-5 py-2 bg-primary-navy  text-white rounded hover:bg-opacity-70 hover:scale-105">
-            <NavLink to={"/log-in"}>Log In</NavLink>
+            <NavLink to={"/login"}>Log In</NavLink>
           </div>
           <div className="px-5 py-2 bg-primary-sky text-white rounded hover:bg-opacity-70 hover:scale-105">
             <NavLink to={"/register"}>Register</NavLink>
