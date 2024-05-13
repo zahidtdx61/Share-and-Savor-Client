@@ -90,10 +90,10 @@ const Navbar = () => {
         </div>
       ) : (
         <div className={`lg:flex gap-2 hidden lg:static`}>
-          <div className="px-5 py-2 bg-primary-navy  text-white rounded hover:bg-opacity-70 hover:scale-105">
+          <div className="px-5 py-2 bg-green-600 text-white rounded hover:bg-opacity-70 hover:scale-105">
             <NavLink to={"/login"}>Log In</NavLink>
           </div>
-          <div className="px-5 py-2 bg-primary-sky text-white rounded hover:bg-opacity-70 hover:scale-105">
+          <div className="px-5 py-2 bg-[#306844] text-white rounded hover:bg-opacity-70 hover:scale-105">
             <NavLink to={"/register"}>Register</NavLink>
           </div>
         </div>

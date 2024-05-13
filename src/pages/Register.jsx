@@ -1,3 +1,4 @@
+import { Divider } from "@mui/joy";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
@@ -5,7 +6,6 @@ import toast from "react-hot-toast";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import useSession from "../hooks/useSession";
-import { Divider } from "@mui/joy";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
@@ -174,7 +174,7 @@ const Register = () => {
   return (
     <>
       <Helmet>
-        <title>Serenity Seekers | Register</title>
+        <title>Share and Savor | Register</title>
       </Helmet>
 
       <div className="w-full flex mb-4 relative min-h-[calc(100vh-116px)]">
@@ -182,13 +182,13 @@ const Register = () => {
           <div className="w-full max-w-md px-4  text-gray-600 sm:px-0">
             <div className="">
               <div className="mt-5 space-y-1">
-                <h3 className="text-blue-800 text-2xl font-bold sm:text-3xl">
+                <h3 className="text-green-600 text-2xl font-bold sm:text-3xl">
                   Register
                 </h3>
                 <p className="">
                   Already have an account?{" "}
                   <Link
-                    to={"/log-in"}
+                    to={"/login"}
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
                     Log in
@@ -392,7 +392,7 @@ const Register = () => {
                 </div>
               </div>
 
-              <button className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
+              <button className="w-full px-4 py-2 text-white font-medium bg-green-600 hover:bg-green-500 active:bg-green-600 rounded-lg duration-150">
                 Create account
               </button>
             </form>

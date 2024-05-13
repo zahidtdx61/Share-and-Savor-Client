@@ -108,7 +108,7 @@ const Login = () => {
         <div className="max-w-sm w-full text-gray-600 space-y-5">
           <div className="text-center pb-8">
             <div className="mt-5">
-              <h3 className="text-blue-800 text-2xl font-bold sm:text-3xl">
+              <h3 className="text-green-600 text-2xl font-bold sm:text-3xl">
                 Log in to your account
               </h3>
             </div>
@@ -204,7 +204,7 @@ const Login = () => {
 
             <input
               type="submit"
-              className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150 hover:cursor-pointer"
+              className="w-full px-4 py-2 text-white font-medium bg-green-600 hover:bg-green-500 active:bg-green-600 rounded-lg duration-150 hover:cursor-pointer"
               value="Log In"
             />
           </form>
