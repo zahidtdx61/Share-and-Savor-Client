@@ -1,27 +1,31 @@
-import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { FaMountain } from "react-icons/fa";
 import { SlCalender } from "react-icons/sl";
 import { useParams } from "react-router-dom";
+import useAsyncEffect from "use-async-effect";
 import LoaderContent from "../components/LoaderContent/LoaderContent";
 import RequestModal from "../components/RequestModal/RequestModal";
 import useSession from "../hooks/useSession";
 
 const ViewFoodDetails = () => {
   const [open, setOpen] = useState(false);
+  const [fetchData, setFetchData] = useState(false);
+  const [food, setFood] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   const session = useSession();
   const { id } = useParams();
 
-  const { data: food = {}, isLoading } = useQuery({
-    queryKey: ["food", { id }],
-    queryFn: () => getFoodData(id),
-  });
-
-  const getFoodData = async (id) => {
+  // const { data: food = {}, isLoading } = useQuery({
+  //   queryKey: ["food", { id }],
+  //   queryFn: () => getFoodData(id),
+  // });
+  useAsyncEffect(async () => {
+    setIsLoading(true);
     const response = await session.get(`/find-food/${id}`);
-    return response?.data?.food;
-  };
+    setFood(response?.data?.food);
+    setIsLoading(false);
+  }, [fetchData]);
 
   // console.log({ food, isLoading, isError, error });
 
@@ -84,7 +88,12 @@ const ViewFoodDetails = () => {
           </button>
         </div>
       )}
-      <RequestModal open={open} setOpen={setOpen} food={food} />
+      <RequestModal
+        open={open}
+        setOpen={setOpen}
+        food={food}
+        setFetchData={setFetchData}
+      />
     </div>
   );
 };

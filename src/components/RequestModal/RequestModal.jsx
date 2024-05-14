@@ -1,11 +1,11 @@
 import { Modal, ModalClose, Sheet, Typography } from "@mui/joy";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import useSession from "../../hooks/useSession";
-import toast from "react-hot-toast";
 
-const RequestModal = ({ open, setOpen, food }) => {
+const RequestModal = ({ open, setOpen, food, setFetchData }) => {
   const { user } = useAuth();
   const session = useSession();
   const { register, handleSubmit, reset } = useForm();
@@ -21,6 +21,7 @@ const RequestModal = ({ open, setOpen, food }) => {
       console.log(res.data);
       reset();
       setOpen(false);
+      setFetchData((prev) => !prev);
       toast.success("Food requested successfully");
     } catch (error) {
       console.error(error);
@@ -174,6 +175,7 @@ RequestModal.propTypes = {
   open: PropTypes.bool.isRequired,
   setOpen: PropTypes.func.isRequired,
   food: PropTypes.object.isRequired,
+  setFetchData: PropTypes.func.isRequired,
 };
 
 export default RequestModal;
