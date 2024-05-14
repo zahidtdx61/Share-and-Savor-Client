@@ -55,11 +55,21 @@ const MyRequests = () => {
             </tr>
           </thead>
 
-          <tbody>
-            {foods.map((food) => (
-              <MyRequestedData key={food._id} food={food} />
-            ))}
-          </tbody>
+          {foods.length === 0 ? (
+            <tbody>
+              <tr>
+                <td colSpan={6} className="text-center text-xl font-bold">
+                  No Foods Found
+                </td>
+              </tr>
+            </tbody>
+          ) : (
+            <tbody>
+              {foods.map((food) => (
+                <MyRequestedData key={food._id} food={food} />
+              ))}
+            </tbody>
+          )}
         </table>
       </div>
     </div>
