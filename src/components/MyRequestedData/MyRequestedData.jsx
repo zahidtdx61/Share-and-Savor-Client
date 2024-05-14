@@ -1,27 +1,20 @@
+import { useQuery } from "@tanstack/react-query";
 import PropTypes from "prop-types";
-import { useState } from "react";
 import { ClipLoader } from "react-spinners";
-import useAsyncEffect from "use-async-effect";
 import useSession from "../../hooks/useSession";
 
 const MyRequestedData = ({ food }) => {
-  const [donnerName, setDonnerName] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const session = useSession();
 
-  useAsyncEffect(async () => {
-    try {
-      setIsLoading(true);
-      // console.log(food.donner);
-      const res = await session.get(`/find-user/${food.donner}`);
-      setDonnerName(res?.data?.user?.name);
-      // console.log(res?.data?.user?.name);
-      setIsLoading(false);
-    } catch (error) {
-      console.error(error);
-      setIsLoading(false);
-    }
-  }, []);
+  const { data: donnerName = "", isLoading } = useQuery({
+    queryKey: ["find-user", { id: food.donner }],
+    queryFn: () => getDonnerName(),
+  });
+
+  const getDonnerName = async () => {
+    const res = await session.get(`/find-user/${food.donner}`);
+    return res?.data?.user?.name;
+  };
 
   if (isLoading)
     return (
@@ -70,7 +63,7 @@ const MyRequestedData = ({ food }) => {
 };
 
 MyRequestedData.propTypes = {
-  food: PropTypes.object,
+  food: PropTypes.object.isRequired,
 };
 
 export default MyRequestedData;
