@@ -12,10 +12,10 @@ const MyRequestedData = ({ food }) => {
   useAsyncEffect(async () => {
     try {
       setIsLoading(true);
-      console.log(food.donner);
+      // console.log(food.donner);
       const res = await session.get(`/find-user/${food.donner}`);
       setDonnerName(res?.data?.user?.name);
-      console.log(res?.data?.user?.name);
+      // console.log(res?.data?.user?.name);
       setIsLoading(false);
     } catch (error) {
       console.error(error);
