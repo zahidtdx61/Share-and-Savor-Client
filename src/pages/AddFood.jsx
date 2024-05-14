@@ -43,7 +43,7 @@ const AddFood = () => {
   if (reqLoading)
     return (
       <div
-        className={`w-[95%] min-h-[calc(100vh-400px)] lg:max-w-screen-xl mx-auto   rounded-lg  mt-12 mb-8 p-2 md:p-4 lg:p-10  flex flex-col  justify-center  items-center `}
+        className={`w-[95%] min-h-[calc(100vh-80px)] lg:max-w-screen-xl mx-auto   rounded-lg  mt-12 mb-8 p-2 md:p-4 lg:p-10  flex flex-col  justify-center  items-center `}
       >
         <Helmet>
           <title>Share and Savor | Add Food</title>

@@ -38,7 +38,7 @@ const MyRequests = () => {
   ];
 
   return (
-    <div className="max-w-screen-xl min-h-[calc(100vh-400px)] mx-auto">
+    <div className="max-w-screen-xl min-h-[calc(100vh-80px)] mx-auto">
       <Helmet>
         <title>Share and Savor | My Requests</title>
       </Helmet>

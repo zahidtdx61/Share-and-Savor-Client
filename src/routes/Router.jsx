@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import AddFood from "../pages/AddFood";
+import AvailableFoods from "../pages/AvailableFoods";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import MyFoods from "../pages/MyFoods";
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
             <UpdateFood />
           </PrivateRoutes>
         ),
+      },
+      {
+        path: "/available-foods",
+        element: <AvailableFoods />,
       },
     ],
   },

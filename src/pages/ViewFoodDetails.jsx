@@ -37,7 +37,7 @@ const ViewFoodDetails = () => {
   if (isLoading) return <LoaderContent pageName={"Food Details"} />;
 
   return (
-    <div className="w-[95%] min-h-[calc(100vh-400px)] lg:max-w-screen-xl mx-auto font-mulish">
+    <div className="w-[95%] min-h-[calc(100vh-80px)] lg:max-w-screen-xl mx-auto font-mulish">
       <Helmet>
         <title>Share and Savor | Food Details</title>
       </Helmet>

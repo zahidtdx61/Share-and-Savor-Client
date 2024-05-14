@@ -32,7 +32,7 @@ const MyFoods = () => {
     return <LoaderContent pageName={"My Foods"} />;
   }
   return (
-    <div className="max-w-screen-xl min-h-[calc(100vh-400px)] mx-auto">
+    <div className="max-w-screen-xl min-h-[calc(100vh-80px)] mx-auto">
       <Helmet>
         <title>Share and Savor | My Foods</title>
       </Helmet>

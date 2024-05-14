@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const LoaderContent = ({pageName}) => {
   return (
     <div
-      className={`min-h-[calc(100vh-400px)] lg:max-w-screen-xl mx-auto  flex flex-col  justify-center  items-center `}
+      className={`min-h-[calc(100vh-80px)] lg:max-w-screen-xl mx-auto  flex flex-col  justify-center  items-center `}
     >
       <Helmet>
         <title>Share and Savor | {pageName}</title>
