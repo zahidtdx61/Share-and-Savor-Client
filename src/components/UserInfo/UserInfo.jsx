@@ -2,14 +2,17 @@ import { Avatar } from "@mui/joy";
 import { NavLink } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 import useAuth from "../../hooks/useAuth";
+import useSession from "../../hooks/useSession";
 
 const UserInfo = () => {
   const { user, logOut } = useAuth();
   const { displayName, photoURL } = user;
+  const session = useSession();
 
   const handleSignOut = async () => {
     try {
       await logOut();
+      await session.get("sign-out");
       console.log("Sign out successful");
     } catch (error) {
       console.log(error.message);

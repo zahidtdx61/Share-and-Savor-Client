@@ -28,7 +28,7 @@ const Login = () => {
   const addUserToDatabase = async (user) => {
     const { uid, email, displayName, photoURL } = user;
     try {
-      // console.log({ uid, email, displayName, photoURL, session });
+      console.log({ uid, email, displayName, photoURL, session });
       await session.post("/add-user", {
         uid: uid,
         email,

@@ -4,6 +4,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { LuMenu } from "react-icons/lu";
 import { NavLink, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useSession from "../../hooks/useSession";
 import UserInfo from "../UserInfo/UserInfo";
 
 const NavbarSmDevice = ({ routes, navStyle, mode }) => {
@@ -11,6 +12,7 @@ const NavbarSmDevice = ({ routes, navStyle, mode }) => {
 
   const location = useLocation();
   const pathname = location.pathname;
+  const session = useSession();
   const { user, logOut } = useAuth();
   useEffect(() => {
     setOpen(false);
@@ -19,6 +21,7 @@ const NavbarSmDevice = ({ routes, navStyle, mode }) => {
   const handleSignOut = async () => {
     try {
       await logOut();
+      await session.get("sign-out");
       console.log("Sign out successful");
     } catch (error) {
       console.log(error.message);
