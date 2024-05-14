@@ -1,20 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { FaMountain } from "react-icons/fa";
 import { SlCalender } from "react-icons/sl";
 import { useParams } from "react-router-dom";
 import LoaderContent from "../components/LoaderContent/LoaderContent";
+import RequestModal from "../components/RequestModal/RequestModal";
 import useSession from "../hooks/useSession";
 
 const ViewFoodDetails = () => {
+  const [open, setOpen] = useState(false);
   const session = useSession();
   const { id } = useParams();
-  const {
-    data: food = {},
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
+
+  const { data: food = {}, isLoading } = useQuery({
     queryKey: ["food", { id }],
     queryFn: () => getFoodData(id),
   });
@@ -47,9 +46,9 @@ const ViewFoodDetails = () => {
           <span
             className={`${
               food.status === "Available"
-                ? "bg-green-100 text-green-400"
-                : "bg-yellow-100 text-yellow-400"
-            } px-5 py-1`}
+                ? "bg-green-300 text-green-800"
+                : "bg-yellow-200 text-yellow-600"
+            } px-5 py-1 rounded ml-2 font-bold`}
           >
             {food.status}
           </span>
@@ -75,15 +74,17 @@ const ViewFoodDetails = () => {
         <span>{food.location}</span>
       </div>
 
-      {
-        food.status === "Available" && (
-          <div className="w-full my-8">
-            <button className="text-green-600 border border-green-600 hover:text-green-400 hover:border-green-400 px-5 py-2 w-full text-center">
-              Request Food
-            </button>
-          </div>
-        )
-      }
+      {food.status === "Available" && (
+        <div className="w-full my-8">
+          <button
+            className="text-green-600 border border-green-600 hover:text-green-400 hover:border-green-400 px-5 py-2 w-full text-center"
+            onClick={() => setOpen(true)}
+          >
+            Request Food
+          </button>
+        </div>
+      )}
+      <RequestModal open={open} setOpen={setOpen} food={food} />
     </div>
   );
 };
