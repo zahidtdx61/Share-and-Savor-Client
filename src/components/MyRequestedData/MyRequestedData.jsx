@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { ClipLoader } from "react-spinners";
 import useAsyncEffect from "use-async-effect";
 import useSession from "../../hooks/useSession";
 
@@ -25,7 +26,24 @@ const MyRequestedData = ({ food }) => {
   if (isLoading)
     return (
       <tr>
-        <td>Loading...</td>
+        <td>
+          <ClipLoader color="#1ba94c" />
+        </td>
+        <td>
+          <ClipLoader color="#1ba94c" />
+        </td>
+        <td>
+          <ClipLoader color="#1ba94c" />
+        </td>
+        <td>
+          <ClipLoader color="#1ba94c" />
+        </td>
+        <td>
+          <ClipLoader color="#1ba94c" />
+        </td>
+        <td>
+          <ClipLoader color="#1ba94c" />
+        </td>
       </tr>
     );
 

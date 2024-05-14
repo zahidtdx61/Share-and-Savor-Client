@@ -1,4 +1,3 @@
-import { Avatar } from "@mui/joy";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -59,8 +58,25 @@ const AddFood = () => {
         <title>Share and Savor | Add Food</title>
       </Helmet>
       <div className="w-full h-fit">
-        <div className="w-[50px] h-[50px] mx-auto">
-          <Avatar size="lg" src={photoURL} />
+        <h1 className="text-3xl font-bold text-center my-8">
+          Add Your Food to donate among Peoples
+        </h1>
+        <div className="w-[70px] h-[70px] mx-auto rounded-full overflow-hidden">
+          <img
+            src={photoURL}
+            className="h-full w-full object-cover object-center"
+          />
+        </div>
+        <div className="font-mulish mx-auto w-fit my-4">
+          <p>
+            Your Name:{" "}
+            <span className="font-semibold text-center ">{displayName}</span>
+          </p>
+          <p>
+            Your Email:{" "}
+            <span className="font-semibold text-center ">{email}</span>
+          </p>
+          
         </div>
       </div>
 
