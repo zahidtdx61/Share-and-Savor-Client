@@ -2,10 +2,14 @@ import { useState } from "react";
 import useAsyncEffect from "use-async-effect";
 import LoaderContent from "../components/LoaderContent/LoaderContent";
 import useSession from "../hooks/useSession";
+import DeleteModal from "../components/DeleteModal/DeleteModal";
 
 const MyFoods = () => {
   const [foods, setFoods] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [foodId, setFoodId] = useState("");
+  const [fetchData, setFetchData] = useState(false);
 
   const session = useSession();
 
@@ -13,13 +17,13 @@ const MyFoods = () => {
     try {
       setIsLoading(true);
       const res = await session.get("/donated-foods");
-      console.log(res.data.donated_foods);
+      // console.log(res.data.donated_foods);
       setFoods(res.data.donated_foods);
       setIsLoading(false);
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [fetchData]);
 
   if (isLoading) {
     return <LoaderContent />;
@@ -57,7 +61,13 @@ const MyFoods = () => {
                 </button>
               </td>
               <td className="px-4 py-2">
-                <button className="bg-red-500 text-white px-5 py-1 rounded-md hover:bg-opacity-75">
+                <button
+                  onClick={() => {
+                    setOpen(true);
+                    setFoodId(food._id);
+                  }}
+                  className="bg-red-500 text-white px-5 py-1 rounded-md hover:bg-opacity-75"
+                >
                   Delete
                 </button>
               </td>
@@ -65,6 +75,9 @@ const MyFoods = () => {
           ))}
         </tbody>
       </table>
+
+      {/* Delete Modal */}
+      <DeleteModal open={open} setOpen={setOpen} foodId={foodId} setFetchData={setFetchData} />
     </div>
   );
 };
