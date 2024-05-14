@@ -2,6 +2,7 @@ import { Outlet, useNavigation } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import useAuth from "../../hooks/useAuth";
 import Loader from "../../pages/Loader";
+import Footer from "../../components/Footer/Footer";
 
 const MainLayout = () => {
   const navigation = useNavigation();
@@ -16,6 +17,7 @@ const MainLayout = () => {
         <Navbar />
       </div>
       <Outlet />
+      <Footer />
     </div>
   );
 };
