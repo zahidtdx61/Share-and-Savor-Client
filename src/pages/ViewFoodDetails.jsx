@@ -22,15 +22,12 @@ const ViewFoodDetails = () => {
 
   const getFoodData = async (id) => {
     const response = await session.get(`/find-food/${id}`);
-    console.log(response?.data?.food);
-    console.log(response?.data?.food);
     return response?.data?.food;
   };
 
   const { mutateAsync } = useMutation({
     mutationFn: async ({ _id }) => {
       const res = await session.get(`/request-food/${_id}`);
-      console.log(res.data);
       return res.data;
     },
     onSuccess: () => {

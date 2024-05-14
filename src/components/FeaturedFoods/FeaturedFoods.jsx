@@ -7,12 +7,7 @@ import LoaderContent from "../LoaderContent/LoaderContent";
 const FeaturedFoods = () => {
   const session = useSession();
 
-  const {
-    data: foods = [],
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
+  const { data: foods = [], isLoading } = useQuery({
     queryKey: ["featuredFoods"],
     queryFn: () => getFoodsData(),
   });
@@ -21,8 +16,6 @@ const FeaturedFoods = () => {
     const response = await session("/all-foods?sorted=quantity&page=1&size=6");
     return response.data.foods;
   };
-
-  console.log({ foods, isLoading, isError, error });
 
   if (isLoading) return <LoaderContent pageName={"Home"} />;
 

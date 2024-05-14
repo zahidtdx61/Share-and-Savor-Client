@@ -27,23 +27,11 @@ const AvailableFoods = () => {
       const res = await session.get(
         `/all-foods?status=Available&search=${search}&sorted=${sort}`
       );
-      console.log(res.data.foods);
       return res.data.foods;
     } catch (error) {
       console.error(error);
     }
   };
-
-  // const { mutateAsync } = useMutation({
-  //   mutationFn: async (searchKey) => {
-  //     const res = await session.get(`/all-foods?search=${searchKey}`);
-  //     console.log(res.data.foods);
-  //     return res.data.foods;
-  //   },
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({ queryKey: ["availableFoods"] });
-  //   },
-  // });
 
   const handleSearch = (data) => {
     console.log("searching");

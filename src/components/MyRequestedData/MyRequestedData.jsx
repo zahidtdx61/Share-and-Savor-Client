@@ -6,7 +6,7 @@ import useSession from "../../hooks/useSession";
 const MyRequestedData = ({ food }) => {
   const session = useSession();
 
-  const { data: donnerName = "", isLoading } = useQuery({
+  const { data: donnerName = "", isLoading, isPending } = useQuery({
     queryKey: ["find-user", { id: food.donner }],
     queryFn: () => getDonnerName(),
   });
@@ -16,7 +16,7 @@ const MyRequestedData = ({ food }) => {
     return res?.data?.user?.name;
   };
 
-  if (isLoading)
+  if (isLoading || isPending)
     return (
       <tr>
         <td>

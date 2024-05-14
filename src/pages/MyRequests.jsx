@@ -1,28 +1,21 @@
-import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
-import useAsyncEffect from "use-async-effect";
 import LoaderContent from "../components/LoaderContent/LoaderContent";
 import MyRequestedData from "../components/MyRequestedData/MyRequestedData";
 import useSession from "../hooks/useSession";
 
 const MyRequests = () => {
-  const [foods, setFoods] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
   const session = useSession();
 
-  useAsyncEffect(async () => {
-    try {
-      setIsLoading(true);
-      const res = await session.get("/requested-foods");
-      // console.log(res.data);
-      setFoods(res.data.requested_foods);
-      setIsLoading(false);
-    } catch (error) {
-      console.error(error);
-      setIsLoading(false);
-    }
-  }, []);
+  const { data: foods = [], isLoading } = useQuery({
+    queryKey: ["requestedFoods"],
+    queryFn: () => getRequestedFoods(),
+  });
+
+  const getRequestedFoods = async () => {
+    const res = await session.get("/requested-foods");
+    return res.data.requested_foods;
+  };
 
   if (isLoading) {
     return <LoaderContent pageName={"My Requests"} />;
