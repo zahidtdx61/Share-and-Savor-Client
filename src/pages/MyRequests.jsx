@@ -3,6 +3,7 @@ import useAsyncEffect from "use-async-effect";
 import LoaderContent from "../components/LoaderContent/LoaderContent";
 import MyRequestedData from "../components/MyRequestedData/MyRequestedData";
 import useSession from "../hooks/useSession";
+import { Helmet } from "react-helmet-async";
 
 const MyRequests = () => {
   const [foods, setFoods] = useState([]);
@@ -14,16 +15,17 @@ const MyRequests = () => {
     try {
       setIsLoading(true);
       const res = await session.get("/requested-foods");
-      console.log(res.data);
+      // console.log(res.data);
       setFoods(res.data.requested_foods);
       setIsLoading(false);
     } catch (error) {
       console.error(error);
+      setIsLoading(false);
     }
   }, []);
 
   if (isLoading) {
-    return <LoaderContent />;
+    return <LoaderContent pageName={"My Requests"}/>;
   }
 
   const tableHeading = [
@@ -37,6 +39,9 @@ const MyRequests = () => {
 
   return (
     <div className="w-[95%] lg:max-w-screen-xl mx-auto overflow-x-auto font-mulish">
+      <Helmet>
+        <title>Share and Savor | My Requests</title>
+      </Helmet>
       <h1 className="text-3xl font-bold text-center my-4">Requested Foods</h1>
       <table className="w-full text-center">
         <thead>

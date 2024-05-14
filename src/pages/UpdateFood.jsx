@@ -1,71 +1,97 @@
-import { Avatar } from "@mui/joy";
 import { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import ReactDatePicker from "react-datepicker";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { ScaleLoader } from "react-spinners";
-import useAuth from "../hooks/useAuth";
+import { useParams } from "react-router-dom";
+import useAsyncEffect from "use-async-effect";
+import LoaderContent from "../components/LoaderContent/LoaderContent";
 import useSession from "../hooks/useSession";
 
-const AddFood = () => {
-  // food_name,quantity,expiry_date,food_image,location,notes,status,donner_id
-  const { register, handleSubmit, reset } = useForm();
+const UpdateFood = () => {
+  const { id } = useParams();
   const session = useSession();
-  const { user } = useAuth();
-  const { displayName, email, photoURL } = user;
-  const [reqLoading, setReqLoading] = useState(false);
+  const { register, handleSubmit } = useForm();
   const [startDate, setStartDate] = useState(new Date());
+  const [expiryDate, setExpiryDate] = useState(new Date());
+  const [food, setFood] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
-  const addFood = async (data) => {
-    setReqLoading(true);
+  useAsyncEffect(async () => {
     try {
-      const foodData = {
-        ...data,
-        expiry_date: startDate,
-        donner_id: user.uid,
-        quantity: parseInt(data.quantity),
-      };
-      // await session.post("/add-user", {
-      //   uid: user.uid,
-      // });
-      const res = await session.post("/add-food", foodData);
-      console.log(res.data);
-      reset();
-      setReqLoading(false);
-      toast.success("Food added successfully for donation");
+      setIsLoading(true);
+      const res = await session.get(`/find-food/${id}`);
+      // console.log(res.data.food);
+      setFood(res.data.food);
+      setExpiryDate(new Date(res.data.food.expiry_date));
+      setStartDate(new Date(res.data.food.expiry_date));
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
-      setReqLoading(false);
+      setIsLoading(false);
+    }
+  }, []);
+
+  const { food_name, food_image, quantity, location, notes, status } = food;
+
+  const updateFood = async (data) => {
+    if (
+      data.food_name === food_name &&
+      data.food_image === food_image &&
+      parseInt(data.quantity) === quantity &&
+      data.location === location &&
+      data.notes === notes &&
+      data.status === status &&
+      new Date(startDate).getTime() === new Date(expiryDate).getTime()
+    ) {
+      toast.error("Please update the fields to update the food");
+      return;
+    }
+
+    // console.log(data.food_name === food_name);
+    // console.log(data.food_image === food_image);
+    // console.log(parseInt(data.quantity) === quantity);
+    // console.log(data.location === location);
+    // console.log(data.notes === notes);
+    // console.log(data.status === status);
+    // console.log(new Date(startDate).getTime() === new Date(expiryDate).getTime());
+
+    const updatedData = {
+      ...data,
+      expiry_date: startDate,
+    };
+
+    try {
+      setIsLoading(true);
+      const res = await session.put(`/update-food/${id}`, updatedData);
+      console.log(res.data);
+      setIsLoading(false);
+      toast.success("Food updated successfully");
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
     }
   };
 
-  if (reqLoading)
-    return (
-      <div
-        className={`w-[95%] min-h-[calc(100vh-400px)] lg:max-w-screen-xl mx-auto   rounded-lg  mt-12 mb-8 p-2 md:p-4 lg:p-10  flex flex-col  justify-center  items-center `}
-      >
-        <Helmet>
-          <title>Share and Savor | Add Food</title>
-        </Helmet>
-        <ScaleLoader size={40} color="#1ba94c" />
-      </div>
-    );
+  if (isLoading) return <LoaderContent pageName={"Update Food"} />;
 
   return (
-    <div className="min-h-[calc(100vh-80px)] max-w-screen-lg p-4 mx-auto">
+    <div className="min-h-[calc(100vh-80px)] max-w-screen-lg p-4 mx-auto font-mulish">
       <Helmet>
-        <title>Share and Savor | Add Food</title>
+        <title>Share and Savor | Update Food</title>
       </Helmet>
       <div className="w-full h-fit">
-        <div className="w-[50px] h-[50px] mx-auto">
-          <Avatar size="lg" src={photoURL} />
+        <h1 className="text-3xl font-bold text-center">Update Food</h1>
+        <div className="w-[250px] h-[150px] mx-auto my-4">
+          <img
+            src={food_image}
+            className="h-full w-full object-cover object-center rounded-md"
+          />
         </div>
       </div>
 
       <form
-        onSubmit={handleSubmit((data) => addFood(data))}
+        onSubmit={handleSubmit((data) => updateFood(data))}
         className="space-y-5"
       >
         <div>
@@ -73,7 +99,7 @@ const AddFood = () => {
           <input
             {...register("food_name")}
             required
-            placeholder="Enter your food name"
+            defaultValue={food_name}
             className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
           />
         </div>
@@ -83,7 +109,7 @@ const AddFood = () => {
           <input
             {...register("food_image")}
             required
-            placeholder="Enter your food image URL"
+            defaultValue={food_image}
             className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
           />
         </div>
@@ -93,14 +119,14 @@ const AddFood = () => {
           <input
             {...register("quantity")}
             required
-            placeholder="Enter your food quantity (for how many person)"
+            defaultValue={quantity}
             className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
           />
         </div>
 
         <div className="flex flex-col">
           <label className="font-medium">Expiry Date</label>
-          <DatePicker
+          <ReactDatePicker
             className="mt-2 w-full border border-[#e9ebee] px-3 py-2 rounded-md "
             selected={startDate}
             onChange={(date) => setStartDate(date)}
@@ -112,7 +138,7 @@ const AddFood = () => {
           <input
             {...register("location")}
             required
-            placeholder="Enter the location"
+            defaultValue={location}
             className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
           />
         </div>
@@ -122,7 +148,7 @@ const AddFood = () => {
           <input
             {...register("notes")}
             required
-            placeholder="Enter any notes"
+            defaultValue={notes}
             className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
           />
         </div>
@@ -131,43 +157,25 @@ const AddFood = () => {
           <label className="font-medium">Status</label>
           <select
             {...register("status")}
-            defaultValue={"Available"}
+            defaultValue={status}
             name="status"
             id=""
             className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border shadow-sm rounded-lg"
           >
             <option value="Available">Available</option>
             <option value="Not Available">Not Available</option>
+            <option value="Requested">Requested</option>
           </select>
-        </div>
-
-        <div>
-          <label className="font-medium">Name</label>
-          <input
-            defaultValue={displayName}
-            disabled
-            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
-          />
-        </div>
-
-        <div>
-          <label className="font-medium">Email</label>
-          <input
-            defaultValue={email}
-            disabled
-            placeholder="Enter your email"
-            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
-          />
         </div>
 
         <input
           type="submit"
           className="w-full px-4 py-2 text-white font-medium bg-green-600 hover:bg-green-500 active:bg-green-600 rounded-lg duration-150 hover:cursor-pointer"
-          value="Add Food"
+          value="Update Food"
         />
       </form>
     </div>
   );
 };
 
-export default AddFood;
+export default UpdateFood;

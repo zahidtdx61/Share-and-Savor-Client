@@ -7,6 +7,7 @@ import MyFoods from "../pages/MyFoods";
 import MyRequests from "../pages/MyRequests";
 import NotFoundPage from "../pages/NotFoundPage";
 import Register from "../pages/Register";
+import UpdateFood from "../pages/UpdateFood";
 import ViewFoodDetails from "../pages/ViewFoodDetails";
 import PrivateRoutes from "./PrivateRoutes";
 
@@ -57,6 +58,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <MyRequests />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/update-food/:id",
+        element: (
+          <PrivateRoutes>
+            <UpdateFood />
           </PrivateRoutes>
         ),
       },

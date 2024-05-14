@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import useAsyncEffect from "use-async-effect";
+import DeleteModal from "../components/DeleteModal/DeleteModal";
 import LoaderContent from "../components/LoaderContent/LoaderContent";
 import useSession from "../hooks/useSession";
-import DeleteModal from "../components/DeleteModal/DeleteModal";
 
 const MyFoods = () => {
   const [foods, setFoods] = useState([]);
@@ -22,20 +24,26 @@ const MyFoods = () => {
       setIsLoading(false);
     } catch (error) {
       console.error(error);
+      setIsLoading(false);
     }
   }, [fetchData]);
 
   if (isLoading) {
-    return <LoaderContent />;
+    return <LoaderContent pageName={"My Foods"} />;
   }
   return (
     <div className="w-[95%] lg:max-w-screen-xl mx-auto overflow-x-auto font-mulish my-8">
+      <Helmet>
+        <title>Share and Savor | My Foods</title>
+      </Helmet>
+
       <h1 className="text-3xl font-bold text-center">My Foods</h1>
       <table className="w-full text-center">
         <thead>
           <tr className="border-b-2">
             <th className="px-4 py-2">Food Name</th>
             <th className="px-4 py-2">Food Image</th>
+            <th className="px-4 py-2">Status</th>
             <th className="px-4 py-2">Expiry Date</th>
             <th className="px-4 py-2">Update</th>
             <th className="px-4 py-2">Delete</th>
@@ -53,11 +61,22 @@ const MyFoods = () => {
                 />
               </td>
               <td className="px-4 py-2">
+                <span
+                  className={`${
+                    food.status === "Available"
+                      ? "bg-green-300 text-green-800"
+                      : "bg-yellow-200 text-yellow-600"
+                  } px-5 py-1 rounded ml-2 font-bold`}
+                >
+                  {food.status}
+                </span>
+              </td>
+              <td className="px-4 py-2">
                 {new Date(food.expiry_date).toLocaleDateString()}
               </td>
               <td className="px-4 py-2">
                 <button className="bg-green-500 text-white px-5 py-1 rounded-md hover:bg-opacity-75">
-                  Update
+                  <Link to={`/update-food/${food._id}`}>Update</Link>
                 </button>
               </td>
               <td className="px-4 py-2">
@@ -77,7 +96,12 @@ const MyFoods = () => {
       </table>
 
       {/* Delete Modal */}
-      <DeleteModal open={open} setOpen={setOpen} foodId={foodId} setFetchData={setFetchData} />
+      <DeleteModal
+        open={open}
+        setOpen={setOpen}
+        foodId={foodId}
+        setFetchData={setFetchData}
+      />
     </div>
   );
 };

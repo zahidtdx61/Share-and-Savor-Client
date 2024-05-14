@@ -24,7 +24,7 @@ const FeaturedFoods = () => {
 
   console.log({ foods, isLoading, isError, error });
 
-  if (isLoading) return <LoaderContent />;
+  if (isLoading) return <LoaderContent pageName={"Home"} />;
 
   return (
     <div className="w-full mt-12">

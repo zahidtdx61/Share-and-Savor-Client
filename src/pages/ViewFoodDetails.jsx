@@ -7,6 +7,7 @@ import useAsyncEffect from "use-async-effect";
 import LoaderContent from "../components/LoaderContent/LoaderContent";
 import RequestModal from "../components/RequestModal/RequestModal";
 import useSession from "../hooks/useSession";
+import { Helmet } from "react-helmet-async";
 
 const ViewFoodDetails = () => {
   const [open, setOpen] = useState(false);
@@ -21,18 +22,25 @@ const ViewFoodDetails = () => {
   //   queryFn: () => getFoodData(id),
   // });
   useAsyncEffect(async () => {
-    setIsLoading(true);
-    const response = await session.get(`/find-food/${id}`);
-    setFood(response?.data?.food);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      const response = await session.get(`/find-food/${id}`);
+      setFood(response?.data?.food);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
   }, [fetchData]);
 
   // console.log({ food, isLoading, isError, error });
 
-  if (isLoading) return <LoaderContent />;
+  if (isLoading) return <LoaderContent pageName={"Food Details"} />;
 
   return (
     <div className="w-[95%] lg:max-w-screen-xl mx-auto font-mulish">
+      <Helmet>
+        <title>Share and Savor | Food Details</title>
+      </Helmet>
       <div className="w-full relative">
         <img
           src={food.food_image}
