@@ -3,6 +3,8 @@ import MainLayout from "../layouts/MainLayout/MainLayout";
 import AddFood from "../pages/AddFood";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import MyFoods from "../pages/MyFoods";
+import MyRequests from "../pages/MyRequests";
 import NotFoundPage from "../pages/NotFoundPage";
 import Register from "../pages/Register";
 import ViewFoodDetails from "../pages/ViewFoodDetails";
@@ -39,6 +41,22 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <ViewFoodDetails />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "my-foods",
+        element: (
+          <PrivateRoutes>
+            <MyFoods />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "my-requests",
+        element: (
+          <PrivateRoutes>
+            <MyRequests />
           </PrivateRoutes>
         ),
       },
