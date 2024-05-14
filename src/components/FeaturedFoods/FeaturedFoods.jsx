@@ -1,11 +1,10 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { ScaleLoader } from "react-spinners";
 import useSession from "../../hooks/useSession";
 import FoodCard from "../FoodCard/FoodCard";
+import LoaderContent from "../LoaderContent/LoaderContent";
 
 const FeaturedFoods = () => {
-  const queryClient = useQueryClient();
   const session = useSession();
 
   const {
@@ -25,14 +24,7 @@ const FeaturedFoods = () => {
 
   console.log({ foods, isLoading, isError, error });
 
-  if (isLoading)
-    return (
-      <div
-        className={`min-h-[calc(100vh-400px)] lg:max-w-screen-xl mx-auto  flex flex-col  justify-center  items-center `}
-      >
-        <ScaleLoader size={40} color="#1ba94c" />
-      </div>
-    );
+  if (isLoading) return <LoaderContent />;
 
   return (
     <div className="w-full mt-12">
@@ -41,10 +33,10 @@ const FeaturedFoods = () => {
       </h2>
       <p className="text-center text-slate-500 mt-4 lg:w-[70%] mx-auto my-4">
         Introducing our selection of dishes generously portioned to serve a
-        crowd. Whether you're hosting a party, celebration, or family gathering,
-        these crowd-pleasers are designed to satisfy and bring everyone
-        together. Discover the joy of sharing food with our selection that can
-        be enjoyed by many!
+        crowd. Whether you&apos;re hosting a party, celebration, or family
+        gathering, these crowd-pleasers are designed to satisfy and bring
+        everyone together. Discover the joy of sharing food with our selection
+        that can be enjoyed by many!
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
         {foods.map((food) => (

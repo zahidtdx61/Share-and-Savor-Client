@@ -13,7 +13,6 @@ const FoodCard = ({ food }) => {
     quantity,
     expiry_date,
     location,
-    notes,
     status,
   } = food;
   return (
