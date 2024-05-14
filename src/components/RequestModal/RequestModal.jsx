@@ -3,11 +3,9 @@ import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
-import useSession from "../../hooks/useSession";
 
-const RequestModal = ({ open, setOpen, food, setFetchData }) => {
+const RequestModal = ({ open, setOpen, food, mutateAsync }) => {
   const { user } = useAuth();
-  const session = useSession();
   const { register, handleSubmit, reset } = useForm();
   const { email } = user;
   const { food_name, food_image, expiry_date, location, _id, donner } = food;
@@ -17,11 +15,9 @@ const RequestModal = ({ open, setOpen, food, setFetchData }) => {
 
   const requestFood = async () => {
     try {
-      const res = await session.get(`/request-food/${_id}`);
-      console.log(res.data);
+      await mutateAsync({ _id });
       reset();
       setOpen(false);
-      setFetchData((prev) => !prev);
       toast.success("Food requested successfully");
     } catch (error) {
       console.error(error);
@@ -57,10 +53,10 @@ const RequestModal = ({ open, setOpen, food, setFetchData }) => {
         >
           Request your desired food
         </Typography>
-        <div className="bg-white p-8 ">
+        <div className="p-8 ">
           <form
             onSubmit={handleSubmit(() => requestFood())}
-            className="space-y-5 bg-white"
+            className="space-y-5"
           >
             <div>
               <label className="font-medium">Food Name</label>
@@ -162,7 +158,7 @@ const RequestModal = ({ open, setOpen, food, setFetchData }) => {
             <input
               type="submit"
               className="w-full px-4 py-2 text-white font-medium bg-green-600 hover:bg-green-500 active:bg-green-600 rounded-lg duration-150 hover:cursor-pointer"
-              value="Add Tourist Spot"
+              value="Request This Food"
             />
           </form>
         </div>
@@ -175,7 +171,7 @@ RequestModal.propTypes = {
   open: PropTypes.bool.isRequired,
   setOpen: PropTypes.func.isRequired,
   food: PropTypes.object.isRequired,
-  setFetchData: PropTypes.func.isRequired,
+  mutateAsync: PropTypes.func.isRequired,
 };
 
 export default RequestModal;

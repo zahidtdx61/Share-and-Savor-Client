@@ -1,38 +1,42 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { CiLocationOn } from "react-icons/ci";
 import { FaMountain } from "react-icons/fa";
 import { SlCalender } from "react-icons/sl";
 import { useParams } from "react-router-dom";
-import useAsyncEffect from "use-async-effect";
 import LoaderContent from "../components/LoaderContent/LoaderContent";
 import RequestModal from "../components/RequestModal/RequestModal";
 import useSession from "../hooks/useSession";
-import { Helmet } from "react-helmet-async";
 
 const ViewFoodDetails = () => {
   const [open, setOpen] = useState(false);
-  const [fetchData, setFetchData] = useState(false);
-  const [food, setFood] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
   const session = useSession();
   const { id } = useParams();
+  const queryClient = useQueryClient();
 
-  // const { data: food = {}, isLoading } = useQuery({
-  //   queryKey: ["food", { id }],
-  //   queryFn: () => getFoodData(id),
-  // });
-  useAsyncEffect(async () => {
-    try {
-      setIsLoading(true);
-      const response = await session.get(`/find-food/${id}`);
-      setFood(response?.data?.food);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-    }
-  }, [fetchData]);
+  const { data: food = {}, isLoading } = useQuery({
+    queryKey: ["food", { id }],
+    queryFn: () => getFoodData(id),
+  });
 
-  // console.log({ food, isLoading, isError, error });
+  const getFoodData = async (id) => {
+    const response = await session.get(`/find-food/${id}`);
+    console.log(response?.data?.food);
+    console.log(response?.data?.food);
+    return response?.data?.food;
+  };
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async ({ _id }) => {
+      const res = await session.get(`/request-food/${_id}`);
+      console.log(res.data);
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["food"] });
+    },
+  });
 
   if (isLoading) return <LoaderContent pageName={"Food Details"} />;
 
@@ -86,6 +90,10 @@ const ViewFoodDetails = () => {
         <span>{food.location}</span>
       </div>
 
+      <div className="mt-2">
+        Donated By: <span className="font-bold">{food?.donner?.name}</span>
+      </div>
+
       {food.status === "Available" && (
         <div className="w-full my-8">
           <button
@@ -100,7 +108,7 @@ const ViewFoodDetails = () => {
         open={open}
         setOpen={setOpen}
         food={food}
-        setFetchData={setFetchData}
+        mutateAsync={mutateAsync}
       />
     </div>
   );
