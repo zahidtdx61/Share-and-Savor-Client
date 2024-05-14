@@ -6,6 +6,7 @@ import Login from "../pages/Login";
 import NotFoundPage from "../pages/NotFoundPage";
 import Register from "../pages/Register";
 import ViewFoodDetails from "../pages/ViewFoodDetails";
+import PrivateRoutes from "./PrivateRoutes";
 
 const router = createBrowserRouter([
   {
@@ -27,11 +28,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/add-food",
-        element: <AddFood />,
+        element: (
+          <PrivateRoutes>
+            <AddFood />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/food/:id",
-        element: <ViewFoodDetails />,
+        element: (
+          <PrivateRoutes>
+            <ViewFoodDetails />
+          </PrivateRoutes>
+        ),
       },
     ],
   },
