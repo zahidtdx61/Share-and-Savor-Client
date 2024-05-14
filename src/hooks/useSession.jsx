@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
@@ -21,6 +22,7 @@ const useSession = () => {
       if (error.response.status === 401 || error.response.status === 403) {
         await logOut();
         navigate("/login");
+        toast.error("Session expired, please login again");
       }
       return Promise.reject(error);
     }

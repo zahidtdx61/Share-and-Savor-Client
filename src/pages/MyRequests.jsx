@@ -36,7 +36,8 @@ const MyRequests = () => {
   ];
 
   return (
-    <div className="w-[95%] lg:max-w-screen-xl mx-auto overflow-x-auto">
+    <div className="w-[95%] lg:max-w-screen-xl mx-auto overflow-x-auto font-mulish">
+      <h1 className="text-3xl font-bold text-center my-4">Requested Foods</h1>
       <table className="w-full text-center">
         <thead>
           <tr className="border-b-2">
