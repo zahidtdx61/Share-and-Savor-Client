@@ -16,9 +16,23 @@ const AddFood = () => {
   const { displayName, email, photoURL } = user;
   const [reqLoading, setReqLoading] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
+  const [quantityError, setQuantityError] = useState("");
 
   const addFood = async (data) => {
     setReqLoading(true);
+    setQuantityError("");
+
+    if (isNaN(parseInt(data.quantity))) {
+      setQuantityError("Quantity should be a number.(Just input number only)");
+      setReqLoading(false);
+      return;
+    }
+
+    if (parseInt(data.quantity) < 1) {
+      setQuantityError("Quantity should be greater than 0");
+      setReqLoading(false);
+      return;
+    }
     try {
       const foodData = {
         ...data,
@@ -76,7 +90,6 @@ const AddFood = () => {
             Your Email:{" "}
             <span className="font-semibold text-center ">{email}</span>
           </p>
-          
         </div>
       </div>
 
@@ -112,6 +125,9 @@ const AddFood = () => {
             placeholder="Enter your food quantity (for how many person)"
             className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-600 shadow-sm rounded-lg"
           />
+          {quantityError.length && (
+            <p className="text-xs text-red-700 my-0">{quantityError}</p>
+          )}
         </div>
 
         <div className="flex flex-col">
