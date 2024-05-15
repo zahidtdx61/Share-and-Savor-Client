@@ -21,7 +21,7 @@ const bannerImages = [
 
 const Banner = () => {
   return (
-    <div className="mx-auto mt-6 mb-10 h-[350px] md:h-[550px] lg:h-[450px] relative">
+    <div className="mx-auto mt-6 mb-10 h-[350px] md:h-[450px] lg:h-[480px] relative">
       <Swiper
         slidesPerView={1}
         spaceBetween={0}
@@ -62,8 +62,7 @@ const Banner = () => {
         </h1>
         <p className="text-base lg:text-xl w-[80%] md:w-[70%] lg:w-[60%] mx-auto text-slate-200">
           Join our community to share and enjoy delicious, home-cooked meals.
-          Together, we can reduce food waste and build stronger connections
-          through the joy of food. Browse, share, and savor the flavors of home!
+          Together, we can reduce food waste and build stronger connections!
         </p>
       </div>
     </div>

@@ -36,11 +36,9 @@ const CustomerReviews = () => {
             See what others saying about us
           </h3>
           <p className="mt-3">
-            Explore the captivating experiences of fellow travelers who have
-            journeyed through Southeast Asia with us. From thrilling adventures
-            to cultural discoveries and culinary delights, read their stories
-            and get inspired for your own adventure. Let their reviews guide you
-            in creating unforgettable memories in Southeast Asia!
+            Hear from our happy community members! See how Share and Savor has
+            brought neighbors together through the joy of sharing home-cooked
+            meals. Read their stories and experiences below.
           </p>
         </div>
         <div className="mt-12">
