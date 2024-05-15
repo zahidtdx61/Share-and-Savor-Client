@@ -3,18 +3,13 @@ import PropTypes from "prop-types";
 import { CiLocationOn } from "react-icons/ci";
 import { FaMountain } from "react-icons/fa";
 import { SlCalender } from "react-icons/sl";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const FoodCard = ({ food }) => {
   const { mode } = useColorScheme();
-  const {
-    food_name,
-    food_image,
-    quantity,
-    expiry_date,
-    location,
-    status,
-  } = food;
+  const navigate = useNavigate();
+  const { food_name, food_image, quantity, expiry_date, location, status } =
+    food;
   return (
     <div
       className={`shadow-lg ${
@@ -51,10 +46,8 @@ const FoodCard = ({ food }) => {
       </div>
       <Divider />
       <div className="w-full p-4">
-        <button className="text-green-600 border border-green-600 hover:text-green-400 hover:border-green-400 px-5 py-2 w-full text-center">
-          <Link to={`/food/${food._id}`} className="w-full">
-            View Details
-          </Link>
+        <button onClick={() => navigate(`/food/${food._id}`)} className="text-green-600 border border-green-600 hover:text-green-400 hover:border-green-400 px-5 py-2 w-full text-center">
+          View Details
         </button>
       </div>
     </div>
