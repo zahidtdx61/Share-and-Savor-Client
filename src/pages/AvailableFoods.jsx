@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import AvailableFoodLottie from "../components/AvailableFoodLottie/AvailableFoodLottie";
 import FoodCard from "../components/FoodCard/FoodCard";
 import LoaderContent from "../components/LoaderContent/LoaderContent";
-import useSession from "../hooks/useSession";
 import TypeWriter from "../components/TypeWriter/TypeWriter";
+import useSession from "../hooks/useSession";
 
 const AvailableFoods = () => {
   const [search, setSearch] = useState("");
@@ -51,12 +52,18 @@ const AvailableFoods = () => {
       <h1 className="text-3xl font-bold text-center h-[50px]">
         <TypeWriter sentences={headingMsg} />
       </h1>
-      <p className="w-full md:w-[80%] lg:w-[60%] mx-auto text-sm mt-4 text-center">
-        Discover delicious, home-cooked meals from your neighbors. Browse,
-        choose your favorites, and connect with cooks to enjoy homemade
-        goodness. Join us in reducing food waste and building community through
-        shared meals.
-      </p>
+
+      <div className="w-full flex items-center justify-between flex-col md:flex-row p-4">
+        <p className="text-center text-base md:text-xl text-slate-500 mt-4 w-full md:w-1/2 mx-auto my-4">
+          Discover delicious, home-cooked meals from your neighbors. Browse,
+          choose your favorites, and connect with cooks to enjoy homemade
+          goodness. Join us in reducing food waste and building community
+          through shared meals.
+        </p>
+        <div className="w-full md:w-1/2 h-[300px] flex justify-center md:justify-end">
+          <AvailableFoodLottie />
+        </div>
+      </div>
 
       <div className="flex flex-wrap gap-2 w-full mt-8">
         <div className="w-full md:w-[45%] lg:w-[32%] mx-auto">

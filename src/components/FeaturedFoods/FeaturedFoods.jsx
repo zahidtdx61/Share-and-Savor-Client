@@ -24,7 +24,7 @@ const FeaturedFoods = () => {
   const headingMsg = ["Featured Foods"];
 
   return (
-    <div className="w-full mt-12">
+    <div className="w-full mt-[70px]">
       <h2 className="text-4xl font-mulish font-bold text-center h-[50px]">
         <TypeWriter sentences={headingMsg} />
       </h2>
@@ -36,7 +36,7 @@ const FeaturedFoods = () => {
           everyone together. Discover the joy of sharing food with our selection
           that can be enjoyed by many!
         </p>
-        <div className="w-full md: w-1/2 h-[300px]">
+        <div className="w-full md:w-1/2 h-[300px] flex justify-center md:justify-end">
           <FeaturedFoodLottie />
         </div>
       </div>
