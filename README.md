@@ -1,69 +1,66 @@
-# Base React Project Template
+# Share and Savor - A Food Sharing Platform
 
-This is a base template for starting new React projects. It comes pre-configured with various packages and tools to streamline the development process.
+Welcome to Share and Savor, a comprehensive platform dedicated to sharing food among people. Our aim is to create a community where individuals can connect and share their culinary creations with others.
+
+## Live Preview
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fshare-and-savor.vercel.app%2F)](https://share-and-savor.vercel.app/)
+You can visit our live site at [Share and Savor](https://share-and-savor.vercel.app/).
 
 ## Features
+#### 1. User Registration and Authentication
+- Users can securely sign up using their email address or quickly sign in using their Google or GitHub accounts through `Firebase` integration.
+- Authentication is managed and verified by our backend services to ensure secure access to user-specific functionalities.
 
-- **React**: A JavaScript library for building user interfaces.
-- **React DOM**: Provides DOM-specific methods that can be used at the top level of a web app to enable React components to be rendered into the DOM.
-- **React Helmet Async**: A package for managing document head tags in React.
-- **React Router DOM**: Declarative routing for React.
-- **React Prop-Types**: A library for typechecking React props and similar objects.
+#### 2. Food Sharing
+- Signed-in users have the ability to share their food creations with the community.
+- Users can upload images, provide descriptions, and specify dietary preferences or restrictions for their shared dishes.
+- Other users can browse and explore the shared food items, leave comments, and interact with the community.
 
-## Development Dependencies
+#### 3. See Available Food
+- Users can browse and search for available food items shared by other users.
+- They can view details such as images, descriptions, and dietary preferences or restrictions.
+- This feature helps users find and connect with others who are willing to share their food.
 
-- **PostCSS**: A tool for transforming styles with JavaScript plugins.
-- **Tailwind CSS**: A utility-first CSS framework for building custom designs quickly.
-- **Vite**: A fast, opinionated web dev build tool that serves your code via native ES Modules.
+#### 4. Update or Delete Own Shared Food
+- Signed-in users can update or delete their own shared food items.
+- This allows users to make changes to their shared dishes or remove them if necessary.
 
-## Installation
+#### 5. Request Food
+- Users can request specific food items from other users.
+- They can send a request to the owner of the food item, expressing their interest in receiving it.
+- This feature facilitates communication and coordination between users for food sharing.
 
-You can install the project in two ways:
 
-### 1. Cloning the Repository
+## Technologies Used
+#### Frontend
+- **React**: Frontend development framework for building user interfaces.
+- **React Router**: For declarative routing within the React application.
+- **React DOM**: Enables rendering of React components in the DOM.
+- **@mui/joy**: MUI's Joy component library.
+- **Firebase**: Backend-as-a-Service platform for hosting and managing application data and authentication.
+- **Axios**: HTTP client for making API requests.
+- **Tankstack Query**: Library for managing state and data fetching in React applications.
 
-Clone the repository to your local machine using the following command:
+#### NPM Packages Used
+- **`@mui/joy`**: MUI's Joy component library.
+- **`react-router-dom`**: Library for declarative routing within the React application.
+- **`react-hook-form`**: Library for building forms in React with easy form validation.
+- **`@tanstack/react-query`**: Library for managing state and data fetching in React applications.
+- **`axios`**: HTTP client for making API requests.
+- **`swiper`**: Modern touch slider library for building interactive carousels and sliders.
+- **`react-datepicker`**: Customizable date picker component for React.
+- **`useAsyncEffect`**: Custom hook for handling asynchronous effects in React components.
+- **`lottie-react`**: Used for rendering Lottie animations in React components.
+- **`react-icons`**: Library for popular icon packs as React components.
+- **`react-helmet-async`**: Library for managing document head contents in React applications.
+- **`react-hot-toast`**: Toast notifications library for React applications.
+- **`react-tooltip`**: Library for creating tooltips in React components.
+- **`prop-types`**: Runtime type checking for React props and similar objects.
+- **`eslint`**: Pluggable JavaScript linter.
+- **`tailwindcss`**: Utility-first CSS framework.
+- **`postcss`**: Tool for transforming CSS with JavaScript.
+- **`autoprefixer`**: PostCSS plugin to parse CSS and add vendor prefixes.
+- **`vite`**: Next generation frontend tooling.
 
-```bash
-git clone https://github.com/zahidtdx61/Base-React-Project-Template.git
-```
-
-Then, navigate to the project directory and install dependencies:
-
-```bash
-cd Base-React-Project-Template
-npm install
-```
-
-### 2. Downloading as a .zip File
-
-1. Download the project folder as a .zip file from the repository.
-2. Extract the contents of the .zip file to your desired location on your local machine.
-3. Open a terminal and navigate to the extracted folder (Base-React-Project-Template).
-4. Install project dependencies:
-
-```bash
-npm install
-```
-
-## Usage
-
-After installing dependencies, you can start the development server:
-
-```bash
-npm run dev
-```
-
-## Deployment
-
-This project includes configuration for deployment on various platforms:
-
-- **Vercel**: For deployment on Vercel, the necessary configuration can be found in `vercel.json` file in the root folder.
-- **Netlify**: For deployment on Netlify, the necessary configuration can be found in `_redirects` file located in the `public` folder.
-- **Surge**: For deployment on Surge, update the domain name in the `CNAME` file located in the `public` folder.
-
-Make sure to adjust these configurations according to your deployment settings.
-
-## Contributing
-
-Contributions are welcome! If you have ideas for improvements or new features, feel free to open an issue or submit a pull request.
+## Contribution
+We welcome contributions from the community to enhance and improve Share and Savor. 
