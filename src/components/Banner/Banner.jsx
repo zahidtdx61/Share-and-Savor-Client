@@ -16,7 +16,7 @@ const bannerImages = [
   "https://images.unsplash.com/photo-1515669097368-22e68427d265?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "https://images.unsplash.com/photo-1558467523-46113f1fcf72?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "https://images.unsplash.com/photo-1498579150354-977475b7ea0b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1606787366850-de6330128bfc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  "https://images.unsplash.com/photo-1606787366850-de6330128bfc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 ];
 
 const Banner = () => {
@@ -24,7 +24,7 @@ const Banner = () => {
     <div className="mx-auto mt-6 mb-10 h-[350px] md:h-[550px] lg:h-[450px] relative">
       <Swiper
         slidesPerView={1}
-        spaceBetween={2}
+        spaceBetween={0}
         pagination={{
           clickable: true,
         }}
@@ -35,15 +35,15 @@ const Banner = () => {
         breakpoints={{
           640: {
             slidesPerView: 1,
-            spaceBetween: 2,
+            spaceBetween: 0,
           },
           768: {
             slidesPerView: 2,
-            spaceBetween: 2,
+            spaceBetween: 0,
           },
           1024: {
             slidesPerView: 3,
-            spaceBetween: 2,
+            spaceBetween: 0,
           },
         }}
         className="mySwiper"
@@ -54,13 +54,13 @@ const Banner = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="text-4xl md:text-5xl lg:text-6xl absolute top-[20%] left-0 z-20 text-center">
-        <h1 className="font-bold  select-none font-lexend mb-8">
+      <div className="text-4xl md:text-5xl w-[80%] mx-auto lg:text-6xl absolute top-[20%] left-[10%] z-20 text-center">
+        <h1 className="font-bold w-fit mx-auto  select-none font-lexend mb-8">
           <span className="font-bold bg-gradient-to-r from-green-400 via-red-400 to-slate-400 text-transparent bg-clip-text bg-300% animate-gradient">
             Share and Savor
           </span>
         </h1>
-        <p className="text-base lg:text-xl md:w-[70%] lg:w-[60%] mx-auto text-slate-200">
+        <p className="text-base lg:text-xl w-[80%] md:w-[70%] lg:w-[60%] mx-auto text-slate-200">
           Join our community to share and enjoy delicious, home-cooked meals.
           Together, we can reduce food waste and build stronger connections
           through the joy of food. Browse, share, and savor the flavors of home!
