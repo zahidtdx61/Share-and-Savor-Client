@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import Banner from "../components/Banner/Banner";
 import CustomerReviews from "../components/CustomerReviews/CustomerReviews";
 import FeaturedFoods from "../components/FeaturedFoods/FeaturedFoods";
+import Newsletter from "../components/Newsletter/Newsletter";
 import TypeWriter from "../components/TypeWriter/TypeWriter";
 
 const Home = () => {
@@ -30,6 +31,7 @@ const Home = () => {
       </div>
 
       <CustomerReviews />
+      <Newsletter />
     </>
   );
 };
