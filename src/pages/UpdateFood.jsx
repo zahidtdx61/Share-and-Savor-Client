@@ -1,36 +1,52 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
-import useAsyncEffect from "use-async-effect";
 import LoaderContent from "../components/LoaderContent/LoaderContent";
 import useSession from "../hooks/useSession";
 
 const UpdateFood = () => {
   const { id } = useParams();
   const session = useSession();
+  const queryClient = useQueryClient();
   const { register, handleSubmit } = useForm();
   const [startDate, setStartDate] = useState(new Date());
   const [expiryDate, setExpiryDate] = useState(new Date());
-  const [food, setFood] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
 
-  useAsyncEffect(async () => {
-    try {
-      setIsLoading(true);
-      const res = await session.get(`/find-food/${id}`);
-      // console.log(res.data.food);
-      setFood(res.data.food);
-      setExpiryDate(new Date(res.data.food.expiry_date));
-      setStartDate(new Date(res.data.food.expiry_date));
-      setIsLoading(false);
-    } catch (error) {
+  const {
+    data: food = {},
+    isLoading,
+    isPending,
+  } = useQuery({
+    queryKey: ["food", { id }],
+    queryFn: () => getFoodData(id),
+  });
+
+  const getFoodData = async (id) => {
+    const response = await session.get(`/find-food/${id}`);
+    setExpiryDate(new Date(response.data.food.expiry_date));
+    setStartDate(new Date(response.data.food.expiry_date));
+
+    return response?.data?.food;
+  };
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async ({ id, updatedData }) => {
+      const res = await session.put(`/update-food/${id}`, updatedData);
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["food"] });
+      toast.success("Food updated successfully");
+    },
+    onError: (error) => {
       console.error(error);
-      setIsLoading(false);
-    }
-  }, []);
+      toast.error("An error occurred. Please try again");
+    },
+  });
 
   const { food_name, food_image, quantity, location, notes, status } = food;
 
@@ -48,32 +64,15 @@ const UpdateFood = () => {
       return;
     }
 
-    // console.log(data.food_name === food_name);
-    // console.log(data.food_image === food_image);
-    // console.log(parseInt(data.quantity) === quantity);
-    // console.log(data.location === location);
-    // console.log(data.notes === notes);
-    // console.log(data.status === status);
-    // console.log(new Date(startDate).getTime() === new Date(expiryDate).getTime());
-
     const updatedData = {
       ...data,
       expiry_date: startDate,
     };
 
-    try {
-      setIsLoading(true);
-      const res = await session.put(`/update-food/${id}`, updatedData);
-      console.log(res.data);
-      setIsLoading(false);
-      toast.success("Food updated successfully");
-    } catch (error) {
-      console.error(error);
-      setIsLoading(false);
-    }
+    await mutateAsync({ id, updatedData });
   };
 
-  if (isLoading) return <LoaderContent pageName={"Update Food"} />;
+  if (isLoading || isPending) return <LoaderContent pageName={"Update Food"} />;
 
   return (
     <div className="min-h-[calc(100vh-80px)] max-w-screen-lg p-4 mx-auto font-mulish">
