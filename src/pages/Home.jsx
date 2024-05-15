@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import Banner from "../components/Banner/Banner";
+import CustomerReviews from "../components/CustomerReviews/CustomerReviews";
 import FeaturedFoods from "../components/FeaturedFoods/FeaturedFoods";
 import TypeWriter from "../components/TypeWriter/TypeWriter";
 
@@ -27,6 +28,8 @@ const Home = () => {
       <div className="min-h-[calc(100vh-80px)] max-w-screen-lg mx-auto">
         <FeaturedFoods />
       </div>
+
+      <CustomerReviews />
     </>
   );
 };

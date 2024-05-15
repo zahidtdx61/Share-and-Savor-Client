@@ -40,7 +40,7 @@ const FeaturedFoods = () => {
         ))}
       </div>
 
-      <div className="w-full">
+      <div className="w-full mt-8">
         <button className="bg-green-600 block text-white hover:bg-opacity-75 text-xl w-fit mx-auto px-5 py-2 rounded-md">
           <Link to="/available-foods">View All Available Foods</Link>
         </button>
