@@ -15,10 +15,17 @@ const ViewFoodDetails = () => {
   const { id } = useParams();
   const queryClient = useQueryClient();
 
-  const { data: food = {}, isLoading } = useQuery({
+  const {
+    data: food = {},
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
     queryKey: ["food", { id }],
     queryFn: () => getFoodData(id),
   });
+
+  console.log({ isError, error });
 
   const getFoodData = async (id) => {
     const response = await session.get(`/find-food/${id}`);

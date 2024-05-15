@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import FoodCard from "../components/FoodCard/FoodCard";
 import LoaderContent from "../components/LoaderContent/LoaderContent";
 import useSession from "../hooks/useSession";
+import TypeWriter from "../components/TypeWriter/TypeWriter";
 
 const AvailableFoods = () => {
   const [search, setSearch] = useState("");
@@ -43,10 +44,13 @@ const AvailableFoods = () => {
     return <LoaderContent pageName={"Available Foods"} />;
   }
 
-  // console.log(foods);
+  const headingMsg = ["All Available Foods"];
+
   return (
     <div className="min-h-[calc(100vh-80px)] w-[95%] mx-auto max-w-screen-xl mt-12 font-mulish">
-      <h1 className="text-3xl font-bold text-center">All Available Foods</h1>
+      <h1 className="text-3xl font-bold text-center h-[50px]">
+        <TypeWriter sentences={headingMsg} />
+      </h1>
       <p className="w-full md:w-[80%] lg:w-[60%] mx-auto text-sm mt-4 text-center">
         Discover delicious, home-cooked meals from your neighbors. Browse,
         choose your favorites, and connect with cooks to enjoy homemade

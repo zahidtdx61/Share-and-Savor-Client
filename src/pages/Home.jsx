@@ -1,8 +1,11 @@
 import { Helmet } from "react-helmet-async";
 import Banner from "../components/Banner/Banner";
 import FeaturedFoods from "../components/FeaturedFoods/FeaturedFoods";
+import TypeWriter from "../components/TypeWriter/TypeWriter";
 
 const Home = () => {
+  const msg = ["Welcome to Share and Savor"];
+
   return (
     <>
       <Helmet>
@@ -10,8 +13,8 @@ const Home = () => {
       </Helmet>
 
       <div className="max-w-screen-lg p-4 mx-auto">
-        <h1 className="text-4xl font-bold text-center">
-          Welcome to Share and Savor
+        <h1 className="text-4xl font-bold text-center h-[80px] md:h-[50px]">
+          <TypeWriter sentences={msg} />
         </h1>
         <p className="mt-2 text-lg text-center">
           Share and Savor is a platform where you can share food with others and

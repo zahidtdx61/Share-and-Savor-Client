@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import useSession from "../../hooks/useSession";
 import FoodCard from "../FoodCard/FoodCard";
 import LoaderContent from "../LoaderContent/LoaderContent";
+import TypeWriter from "../TypeWriter/TypeWriter";
 
 const FeaturedFoods = () => {
   const session = useSession();
@@ -19,10 +20,12 @@ const FeaturedFoods = () => {
 
   if (isLoading) return <LoaderContent pageName={"Home"} />;
 
+  const headingMsg = ["Featured Foods"];
+
   return (
     <div className="w-full mt-12">
-      <h2 className="text-4xl font-mulish font-bold text-center">
-        Featured Foods
+      <h2 className="text-4xl font-mulish font-bold text-center h-[50px]">
+        <TypeWriter sentences={headingMsg} />
       </h2>
       <p className="text-center text-slate-500 mt-4 lg:w-[70%] mx-auto my-4">
         Introducing our selection of dishes generously portioned to serve a
