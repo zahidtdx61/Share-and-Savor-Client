@@ -24,12 +24,14 @@ const AddFood = () => {
 
     if (isNaN(parseInt(data.quantity))) {
       setQuantityError("Quantity should be a number.(Just input number only)");
+      toast.error("Quantity should be a number.(Just input number only)");
       setReqLoading(false);
       return;
     }
 
     if (parseInt(data.quantity) < 1) {
       setQuantityError("Quantity should be greater than 0");
+      toast.error("Quantity should be greater than 0");
       setReqLoading(false);
       return;
     }
