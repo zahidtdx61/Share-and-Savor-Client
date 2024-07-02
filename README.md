@@ -4,7 +4,44 @@ Welcome to Share and Savor, a comprehensive platform dedicated to sharing food a
 
 ## Live Preview
 [![Website](https://img.shields.io/website?url=https%3A%2F%2Fshare-and-savor.vercel.app%2F)](https://share-and-savor.vercel.app/)
+
 You can visit our live site at [Share and Savor](https://share-and-savor.vercel.app/).
+
+## Backend Repo
+ - [Share and Savor Backend Repository](https://github.com/zahidtdx61/Share-and-Savor-Backend).
+
+## Installation
+
+To run the website locally, follow these steps:
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/zahidtdx61/Share-and-Savor-Frontend.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd Share-and-Savor-Frontend
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
+4. Make an .env file and add these credentials:
+
+   ```env
+   VITE_apiKey=<get_this_from_firebase>
+   VITE_authDomain=<get_this_from_firebase>
+   VITE_projectId=<get_this_from_firebase>
+   VITE_storageBucket=<get_this_from_firebase>
+   VITE_messagingSenderId=<get_this_from_firebase>
+   VITE_appId=<get_this_from_firebase>
+   VITE_API_URL=<add_you_backend_api_address>
+   ```
+
+5. Start the development server:
+   ```sh
+   npm run dev
+   ```
 
 ## Features
 #### 1. User Registration and Authentication
